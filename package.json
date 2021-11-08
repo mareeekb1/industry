@@ -2,6 +2,10 @@
   "name": "iteria",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "16.13.0",
+    "yarn": "1.22.5"
+  },
   "dependencies": {
     "@apollo/client": "^3.4.16",
     "@graphql-codegen/cli": "^2.2.2",
@@ -35,7 +39,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "generate": "graphql-codegen --config codegen.js"
+    "generate": "graphql-codegen --config codegen.js",
+    "heroku-postbuild": "ng build --prod"
   },
   "eslintConfig": {
     "extends": [
