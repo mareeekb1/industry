@@ -2,10 +2,6 @@
   "name": "iteria",
   "version": "0.1.0",
   "private": true,
-  "engines": {
-    "node": "16.13.0",
-    "yarn": "1.22.5"
-  },
   "dependencies": {
     "@types/jest": "^26.0.15",
     "@types/node": "^12.0.0",
@@ -29,9 +25,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "generate": "graphql-codegen --config codegen.js",
-    "heroku-postbuild": "ng build --prod"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
