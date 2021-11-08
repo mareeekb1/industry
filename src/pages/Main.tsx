@@ -5,29 +5,12 @@ import ListOfCustomers from '../components/ListOfCustomers'
 import Loader from '../components/general/Loader';
 
 import { useQuery } from 'urql';
+import { AllCustomersQuery } from '../store/queries';
 
 const Main = () => {
 
-    const Query = `
-    query MyQuery {
-        Customers {
-          orders {
-            customer_id
-            date_of_order
-            id
-            number_of_products
-            sum_of_order
-          }
-          birth_date
-          id
-          is_vip
-          name
-        }
-      }
-    `;
-
     const [result] = useQuery({
-        query: Query,
+        query: AllCustomersQuery,
       });
     const { data, fetching, error } = result;
 
