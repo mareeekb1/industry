@@ -1,0 +1,7 @@
+{
+  "projects": {
+    "default": "deskhub-e150b",
+    "staging": "deskhub-e150b",
+    "production": "deskhub-e150b"
+  }
+}
