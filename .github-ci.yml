@@ -1,0 +1,65 @@
+stages:
+    - prod-frontend
+    - dev-frontend
+    - test-frontend
+
+prod-frontend:
+    image: node:16.13.0
+    stage: prod-frontend
+    before_script:
+        - apt-get update -qq && apt-get install -y -qq sshpass rsync
+    script:
+        - echo "Starting deployment process for prod-frontend APP"
+        - cd ./frontend && yarn install && yarn build --no-source-maps
+        - cd build/
+        - sshpass -V
+        - export SSHPASS=$USER_PASS
+        - sshpass -e rsync -r --omit-dir-times -e "ssh -o StrictHostKeyChecking=no" . $USER@$SERVER_IP:/home/$USER/webapps/hriis/prod/frontend/build
+        - echo "prod-frontend APP was successfully updated"
+    only:
+        refs:
+            - master
+        variables:
+            - $CI_COMMIT_MESSAGE =~ /^prod-frontend/
+            - $CI_COMMIT_MESSAGE =~ /^prod-both/
+
+dev-frontend:
+    image: node:16.13.0
+    stage: dev-frontend
+    before_script:
+        - apt-get update -qq && apt-get install -y -qq sshpass rsync
+    script:
+        - echo "Starting deployment process for dev-frontend APP"
+        - cd ./frontend && yarn install && yarn build --no-source-maps
+        - cd build/
+        - sshpass -V
+        - export SSHPASS=$USER_PASS
+        - sshpass -e rsync -r --omit-dir-times -e "ssh -o StrictHostKeyChecking=no" . $USER@$SERVER_IP:/home/$USER/webapps/hriis/dev/frontend/build
+        - echo "dev-frontend APP was successfully updated"
+    only:
+        refs:
+            - dev
+        variables:
+            - $CI_COMMIT_MESSAGE =~ /^dev-frontend/
+            - $CI_COMMIT_MESSAGE =~ /^dev-both/
+
+test-frontend:
+    image: node:16.13.0
+    stage: test-frontend
+    before_script:
+        - apt-get update -qq && apt-get install -y -qq sshpass rsync
+    script:
+        - echo "Starting deployment process for test-frontend APP"
+        - cd ./frontend && yarn install && yarn build --no-source-maps
+        - cd build/
+        - sshpass -V
+        - export SSHPASS=$USER_PASS
+        - sshpass -e rsync -r --omit-dir-times -e "ssh -o StrictHostKeyChecking=no" . $USER@$SERVER_IP:/home/$USER/webapps/hriis/test/frontend/build
+        - echo "test-frontend APP was successfully updated"
+    only:
+        refs:
+            - dev
+        variables:
+            - $CI_COMMIT_MESSAGE =~ /^test-frontend/
+            - $CI_COMMIT_MESSAGE =~ /^test-both/
+
