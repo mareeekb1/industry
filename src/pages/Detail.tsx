@@ -7,6 +7,7 @@ import ListOfOrders from '../components/ListOfOrders';
 import { useQuery } from 'urql';
 import { GetCustomerByIdQuery } from '../store/queries';
 import Loader from '../components/general/Loader';
+import { routes } from '../store/routes';
 
 const Detail = () => {
 
@@ -25,7 +26,7 @@ const Detail = () => {
     return (
         <Box animation="zoomIn">
             <Box direction="row" align='center' >
-                <Previous size='large' style={styles.back_btn} onClick={()=>history.goBack()}/>
+                <Previous size='large' style={styles.back_btn} onClick={()=>history.push(routes.MAIN)}/>
                 <Heading color="blue" alignSelf="center">
                     <span style={{textAlign:'center'}}>Customer detail</span>
                 </Heading>
