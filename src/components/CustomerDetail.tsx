@@ -3,7 +3,7 @@ import { Box, Grid, Heading } from "grommet";
 
 import { Star, User } from "grommet-icons";
 import { Customer } from "../store/interfaces";
-import { getSumOfOrders, dotDateFormat } from "../store/utils";
+import { dotDateFormat } from "../store/utils";
 
 const CustomerDetail: React.FC<Customer> = (props) => {
     return (
@@ -32,16 +32,6 @@ const CustomerDetail: React.FC<Customer> = (props) => {
                 <Heading level={6} margin="0">
                     Birth date: {dotDateFormat(props.birth_date)}
                 </Heading>
-                {props.orders.length !== 0 && (
-                    <Box direction="row">
-                        <Heading level={4} margin="0 1rem 0 0">
-                            Total price of orders:{" "}
-                        </Heading>
-                        <Heading level={4} margin="0" color="blue">
-                            {getSumOfOrders(props.orders)}
-                        </Heading>
-                    </Box>
-                )}
             </Box>
         </Grid>
     );

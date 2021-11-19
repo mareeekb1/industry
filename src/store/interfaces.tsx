@@ -6,23 +6,16 @@ export interface Orders {
         number_of_products: number;
     }[];
 }
-export interface Customers {
-    customers: {
-        id: number;
-        name: string;
-        birth_date: string;
-        is_vip: boolean;
-        orders: Orders["orders"];
-    }[];
-}
 export interface Customer {
     id: number;
     name: string;
     birth_date: string;
     is_vip: boolean;
-    orders: Orders["orders"] | [];
-}
-export interface Product {
-    name: string;
-    cost: number;
+    orders_aggregate: {
+        aggregate: {
+            sum: {
+                sum_of_order: number | null;
+            };
+        };
+    };
 }

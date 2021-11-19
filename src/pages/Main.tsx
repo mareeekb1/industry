@@ -12,7 +12,6 @@ const Main = () => {
         query: AllCustomersQuery,
     });
     const { data, fetching, error } = result;
-
     return (
         <Box>
             <Heading color="blue">List of customers</Heading>
@@ -23,7 +22,7 @@ const Main = () => {
                     {error ? (
                         <p>Oh no... {error.message}</p>
                     ) : (
-                        <ListOfCustomers customers={data.Customers} />
+                        <ListOfCustomers {...data.Customers} />
                     )}
                 </>
             )}

@@ -1,20 +1,20 @@
 export const AllCustomersQuery = `
-query {
+  query {
     Customers {
-      orders {
-        customer_id
-        date_of_order
-        id
-        number_of_products
-        sum_of_order
-      }
-      birth_date
       id
-      is_vip
       name
+      is_vip
+      birth_date
+        orders_aggregate {
+        aggregate {
+          sum {
+            sum_of_order
+          }
+        }
+      }
     }
-  }
-`;
+  }`;
+
 export const GetCustomerByIdQuery = `
 query ($id:Int!) {
     Customers_by_pk( id : $id) {

@@ -19,7 +19,7 @@ const Detail = () => {
     });
 
     const { data, fetching, error } = result;
-
+    console.log(data);
     return (
         <Box animation="zoomIn">
             <Box direction="row" align="center">
