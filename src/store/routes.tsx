@@ -1,4 +1,4 @@
 export const routes = {
-    MAIN:'/',
-    DETAIL:'/detail/'
-}
+    MAIN: "/",
+    DETAIL: "/detail/",
+};

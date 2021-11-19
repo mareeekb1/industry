@@ -14,7 +14,7 @@ query {
       name
     }
   }
-`
+`;
 export const GetCustomerByIdQuery = `
 query ($id:Int!) {
     Customers_by_pk( id : $id) {
