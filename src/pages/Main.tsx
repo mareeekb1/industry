@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { Box, Heading } from "grommet";
 import ListOfCustomers from "../components/ListOfCustomers";
@@ -8,10 +8,19 @@ import { useQuery } from "urql";
 import { AllCustomersQuery } from "../store/queries";
 
 const Main = () => {
-    const [result] = useQuery({
+    const [result, reexecuteQuery] = useQuery({
         query: AllCustomersQuery,
     });
     const { data, fetching, error } = result;
+
+    const refresh = () => {
+        reexecuteQuery({ requestPolicy: "network-only" });
+    };
+
+    useEffect(() => {
+        refresh();
+        // eslint-disable-next-line
+    }, []);
     return (
         <Box>
             <Heading color="blue">List of customers</Heading>
@@ -22,7 +31,7 @@ const Main = () => {
                     {error ? (
                         <p>Oh no... {error.message}</p>
                     ) : (
-                        <ListOfCustomers {...data.Customers} />
+                        <ListOfCustomers data={data.Customers} />
                     )}
                 </>
             )}

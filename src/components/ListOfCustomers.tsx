@@ -1,15 +1,20 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
+
 import { Box, DataTable } from "grommet";
 import { Star } from "grommet-icons";
+import TableBox from "./general/TableBox";
 
 import { Customer } from "../store/interfaces";
 import { routes } from "../store/routes";
 import { dotDateFormat, resolveSum } from "../store/utils";
 
-const ListOfCustomers: React.FC<[Customer]> = (props) => {
+interface TopCategoriesProps {
+    data: Array<Customer>;
+}
+
+const ListOfCustomers: React.FC<TopCategoriesProps> = ({ data }) => {
     const history = useHistory();
-    const array_of_customers = Object.values(props);
 
     return (
         <DataTable
@@ -23,28 +28,24 @@ const ListOfCustomers: React.FC<[Customer]> = (props) => {
                 {
                     property: "name",
                     header: "Name",
-                    render: ({ name }) => (
-                        <Box pad={{ vertical: "xsmall" }}>{name}</Box>
-                    ),
+                    render: ({ name }) => <TableBox content={name} />,
                 },
                 {
                     property: "birth_date",
                     header: "Birth date",
                     render: ({ birth_date }) => (
-                        <Box pad={{ vertical: "xsmall" }}>
-                            {dotDateFormat(birth_date)}
-                        </Box>
+                        <TableBox content={dotDateFormat(birth_date)} />
                     ),
                 },
                 {
                     property: "orders_aggregate",
                     header: "Sum",
                     render: ({ orders_aggregate }) => (
-                        <Box pad={{ vertical: "xsmall" }}>
-                            {resolveSum(
+                        <TableBox
+                            content={resolveSum(
                                 orders_aggregate.aggregate.sum.sum_of_order
                             )}
-                        </Box>
+                        />
                     ),
                 },
                 {
@@ -57,7 +58,7 @@ const ListOfCustomers: React.FC<[Customer]> = (props) => {
                     ),
                 },
             ]}
-            data={array_of_customers}
+            data={data}
         />
     );
 };

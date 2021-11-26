@@ -5,7 +5,7 @@ import { Star, User } from "grommet-icons";
 import { Customer } from "../store/interfaces";
 import { dotDateFormat } from "../store/utils";
 
-const CustomerDetail: React.FC<Customer> = (props) => {
+const CustomerDetail: React.FC<Customer> = ({ name, is_vip, birth_date }) => {
     return (
         <Grid
             rows={["xsmall"]}
@@ -21,8 +21,8 @@ const CustomerDetail: React.FC<Customer> = (props) => {
             </Box>
             <Box gridArea="main" justify="center" animation="zoomIn">
                 <Heading margin="0" level={2}>
-                    {props.name}
-                    {props.is_vip && (
+                    {name}
+                    {is_vip && (
                         <span style={styles.vip}>
                             <Star color="blue" style={styles.vip} />
                             VIP
@@ -30,7 +30,7 @@ const CustomerDetail: React.FC<Customer> = (props) => {
                     )}
                 </Heading>
                 <Heading level={6} margin="0">
-                    Birth date: {dotDateFormat(props.birth_date)}
+                    Birth date: {dotDateFormat(birth_date)}
                 </Heading>
             </Box>
         </Grid>

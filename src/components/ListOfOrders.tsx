@@ -1,6 +1,7 @@
 import React from "react";
 
 import { Box, Heading, DataTable } from "grommet";
+import TableBox from "./general/TableBox";
 
 import { Orders } from "../store/interfaces";
 import { dotDateFormat, resolveSum } from "../store/utils";
@@ -28,27 +29,21 @@ const ListOfOrders: React.FC<Orders> = ({ orders }) => {
                     property: "date_of_order",
                     header: "Date of order",
                     render: ({ date_of_order }) => (
-                        <Box pad={{ vertical: "xsmall" }}>
-                            {dotDateFormat(date_of_order)}
-                        </Box>
+                        <TableBox content={dotDateFormat(date_of_order)} />
                     ),
                 },
                 {
                     property: "sum_of_order",
                     header: "Sum",
                     render: ({ sum_of_order }) => (
-                        <Box pad={{ vertical: "xsmall" }}>
-                            {resolveSum(sum_of_order)}
-                        </Box>
+                        <TableBox content={resolveSum(sum_of_order)} />
                     ),
                 },
                 {
                     property: "number_of_products",
                     header: "Number of products",
                     render: ({ number_of_products }) => (
-                        <Box pad={{ vertical: "xsmall" }}>
-                            {number_of_products}
-                        </Box>
+                        <TableBox content={number_of_products.toString()} />
                     ),
                 },
             ]}

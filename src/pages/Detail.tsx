@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Box, Heading } from "grommet";
 import { useHistory, useParams } from "react-router-dom";
 import CustomerDetail from "../components/CustomerDetail";
@@ -13,13 +13,21 @@ const Detail = () => {
     const params = useParams<{ id: string }>();
     const history = useHistory();
 
-    const [result] = useQuery({
+    const [result, reexecuteQuery] = useQuery({
         query: GetCustomerByIdQuery,
         variables: { id: parseInt(params.id) },
     });
+    const refresh = () => {
+        reexecuteQuery({ requestPolicy: "network-only" });
+    };
+
+    useEffect(() => {
+        refresh();
+        // eslint-disable-next-line
+    }, [params.id]);
 
     const { data, fetching, error } = result;
-    console.log(data);
+
     return (
         <Box animation="zoomIn">
             <Box direction="row" align="center">
